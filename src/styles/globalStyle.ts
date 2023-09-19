@@ -85,8 +85,4 @@ scrollbar-width: thin;
 .tippy-box[data-theme~="lightGrey"] .tippy-content {
   padding: 13px;
 }
-.rmdp-top-class {
-  width : 100%;
-}
-
 `;
