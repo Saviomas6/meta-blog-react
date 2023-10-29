@@ -9,9 +9,6 @@ import {
 import BannerSection from "./components/bannerSection/BannerSection";
 import EasyStepSection from "./components/easyStepSection/EasyStepSection";
 import { HomeBlogCardContainer, HomeBlogCardHeading } from "./style";
-import ConfirmModal from "../../components/confirmModal/ConfirmModal";
-import ErrorModal from "../../components/errorModal/ErrorModal";
-import SuccessModal from "../../components/successModal/SuccessModal";
 
 const HomeSection = () => {
   return (
