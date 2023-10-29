@@ -1,4 +1,4 @@
-import TippyToolTip from "../../components/tippyTooltip/TippyTooltip";
+import TippyToolTip from "../../components/tippyTooltip/TippyToolTip";
 import { Container, OpacityAnimation, Wrapper } from "../../styles/sharedStyle";
 import {
   BlogDetailDescription,
