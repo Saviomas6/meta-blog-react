@@ -12,6 +12,7 @@ interface I_Props {
   description: string;
   setIsDeleteModalOpen?: any;
   isEditable?: boolean;
+  handleRoute(): void;
 }
 
 const BlogCard = ({
@@ -23,11 +24,12 @@ const BlogCard = ({
   username,
   setIsDeleteModalOpen,
   isEditable,
+  handleRoute,
 }: I_Props) => {
   const navigate = useNavigate();
 
   return (
-    <Styled.BlogCardMainContainer>
+    <Styled.BlogCardMainContainer onClick={handleRoute}>
       <Styled.BlogCardProfileWrapper>
         <Styled.BlogCardProfileImageContainer>
           <Styled.BlogCardProfileImage src={profileImage} alt="profileImage" />

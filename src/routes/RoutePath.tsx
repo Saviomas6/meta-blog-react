@@ -13,6 +13,8 @@ import ProfileSection from "../pages/profileSection/ProfileSection";
 import EditProfileSection from "../pages/editProfileSection/EditProfileSection";
 import { setLoggedDetail, setLoggedIn } from "../logic/redux/action/action";
 import { useEffect } from "react";
+import { useGetUserDetail } from "../logic/reactQuery/query/useGetUserDetail";
+import LoadingText from "../components/loadingText/LoadingText";
 
 export interface RouteDefinition {
   element: any;
@@ -66,7 +68,7 @@ export const routes: RouteDefinition[] = [
   {
     path: Paths.blogDetail,
     element: BlogDetail,
-    protected: false,
+    protected: true,
     title: "Blog Detail",
   },
   {
@@ -87,7 +89,7 @@ const RoutePath = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector((state) => state.userReducer.isLoggedIn);
-
+  const { data, isLoading, isFetching } = useGetUserDetail();
   function getRouteRenderWithAuth(isLoggedIn: boolean, route: RouteDefinition) {
     const RouteComponent = route.requires
       ? route.requires(route.element)
@@ -125,25 +127,36 @@ const RoutePath = () => {
       const currentTime = Date.now();
       if (currentTime < Number(expirationTime)) {
         dispatch(setLoggedIn(true));
-        // dispatch(
-        //   setLoggedDetail([
-        //     {
-        //       name: data?.name,
-        //       email: data?.email,
-        //       isAdmin: data?.isAdmin,
-        //     },
-        //   ])
-        // );
+        dispatch(
+          setLoggedDetail([
+            {
+              bannerUrl: data && data.bannerUrl,
+              bio: data && data.bio,
+              email: data && data.email,
+              joinedDate: data && data.joinedDate,
+              name: data && data.name,
+              profileUrl: data && data.profileUrl,
+              username: data && data.username,
+              _id: data && data._id,
+            },
+          ])
+        );
       } else {
         handleLogout();
       }
     }
-  }, [location]);
+  }, [location, data]);
 
   return (
-    <Layout>
-      <Routes>{routes.map(mapRoutes)}</Routes>
-    </Layout>
+    <>
+      {isLoading || isFetching ? (
+        <LoadingText />
+      ) : (
+        <Layout>
+          <Routes>{routes.map(mapRoutes)}</Routes>
+        </Layout>
+      )}
+    </>
   );
 };
 export default RoutePath;

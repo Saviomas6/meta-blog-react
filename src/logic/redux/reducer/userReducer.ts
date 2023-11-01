@@ -2,10 +2,14 @@ import { createReducer } from "@reduxjs/toolkit";
 import { setLoggedDetail, setLoggedIn, themeToggle } from "../action/action";
 
 interface I_Props {
-  name: string;
+  bannerUrl: string;
+  bio: string;
   email: string;
-  isAdmin?: boolean;
-  profileImage?: string;
+  joinedDate: string;
+  name: string;
+  profileUrl: string;
+  username: string;
+  _id: string;
 }
 
 interface I_InitialStateProps {

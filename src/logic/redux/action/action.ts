@@ -1,7 +1,13 @@
 import { createAction } from "@reduxjs/toolkit";
 interface I_Props {
-  name: string;
+  bannerUrl: string;
+  bio: string;
   email: string;
+  joinedDate: string;
+  name: string;
+  profileUrl: string;
+  username: string;
+  _id: string;
 }
 export const setLoggedIn = createAction<boolean>("setLoggedIn");
 export const setLoggedDetail = createAction<I_Props[]>("setLoggedDetail");

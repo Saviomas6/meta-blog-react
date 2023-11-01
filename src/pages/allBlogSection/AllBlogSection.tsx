@@ -9,10 +9,12 @@ import BlogCard from "../../components/blogCard/BlogCard";
 import { Fragment, useState } from "react";
 import { AllBlogCategorySection, AllBlogHeading } from "./style";
 import { categoryData } from "./categoryData";
+import { useNavigate } from "react-router-dom";
 
 const AllBlogSection = () => {
   const [isCategorySelected, setIsCategorySelected] =
     useState<string>("fashion");
+  const navigate = useNavigate();
   return (
     <Container>
       <Wrapper>
@@ -40,6 +42,7 @@ const AllBlogSection = () => {
                   username="Savio Mascarenhas"
                   heading="New Blog Heading"
                   description="We’ve trained a model called ChatGPT which interacts in a conversational way.."
+                  handleRoute={() => navigate("/blogDetail")}
                 />
               </Fragment>
             ))}

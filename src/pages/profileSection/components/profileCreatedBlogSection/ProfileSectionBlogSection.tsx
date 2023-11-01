@@ -3,9 +3,11 @@ import BlogCard from "../../../../components/blogCard/BlogCard";
 import { CardGridContainer } from "../../../../styles/sharedStyle";
 import { CreatedBlogContainer, CreatedBlogHeading } from "./style";
 import ConfirmModal from "../../../../components/confirmModal/ConfirmModal";
+import { useNavigate } from "react-router-dom";
 
 const ProfileSectionBlogSection = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
   return (
     <>
       <CreatedBlogContainer>
@@ -22,6 +24,7 @@ const ProfileSectionBlogSection = () => {
                 description="We’ve trained a model called ChatGPT which interacts in a conversational way.."
                 setIsDeleteModalOpen={setIsDeleteModalOpen}
                 isEditable={true}
+                handleRoute={() => navigate("/blogDetail")}
               />
             </Fragment>
           ))}

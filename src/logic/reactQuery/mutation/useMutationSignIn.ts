@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { apiEndPoints } from "../../../utils/apiUrl";
 import { axiosInstance } from "../../../utils/axiosIntercepter";
 
@@ -12,13 +12,10 @@ const signInForm = (options: I_Props) => {
 };
 
 export const useSignInFormMutation = () => {
-  //   const queryClient = useQueryClient();
-  return useMutation(
-    signInForm
-    //     , {
-    //     onSuccess: (_data) => {
-    //       queryClient.invalidateQueries("userDetails");
-    //     },
-    //   }
-  );
+  const queryClient = useQueryClient();
+  return useMutation(signInForm, {
+    onSuccess: (_data) => {
+      queryClient.invalidateQueries("userDetail");
+    },
+  });
 };

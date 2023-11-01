@@ -9,8 +9,10 @@ import {
 import BannerSection from "./components/bannerSection/BannerSection";
 import EasyStepSection from "./components/easyStepSection/EasyStepSection";
 import { HomeBlogCardContainer, HomeBlogCardHeading } from "./style";
+import { useNavigate } from "react-router-dom";
 
 const HomeSection = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Container>
@@ -30,6 +32,7 @@ const HomeSection = () => {
                       username="Savio Mascarenhas"
                       heading="New Blog Heading"
                       description="We’ve trained a model called ChatGPT which interacts in a conversational way.."
+                      handleRoute={() => navigate("/blogDetail")}
                     />
                   </Fragment>
                 ))}

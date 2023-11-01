@@ -61,6 +61,8 @@ const RegisterSection = () => {
     isLoading,
     data,
   }: any = useSignUpFormMutation();
+  const currentDate = new Date(); // Get the current date and time
+  const formattedDate = currentDate.toISOString(); // Format the date to ISO format
   const initialValue: I_RegisterProps = {
     name: "",
     username: "",
@@ -70,7 +72,7 @@ const RegisterSection = () => {
     bio: "",
     profileUrl: "",
     bannerUrl: "",
-    joinedDate: "",
+    joinedDate: formattedDate,
   };
 
   const handleUserRegister = async (

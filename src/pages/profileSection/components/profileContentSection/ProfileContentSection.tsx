@@ -9,26 +9,32 @@ import {
   ProfileSectionUerName,
 } from "./style";
 import { Paths } from "../../../../routes/path";
+import { useAppSelector } from "../../../../logic/redux/store/hooks";
+import { formatDate } from "../../../../utils/utils";
 
 const ProfileContentSection = () => {
+  const isLoggedDetail = useAppSelector(
+    (state) => state.userReducer.isLoggedDetail
+  );
+
   const navigate = useNavigate();
   return (
     <ProfileSectionContentContainer>
-      <ProfileSectionName color="#fff">Savio Mascarenhas</ProfileSectionName>
+      <ProfileSectionName color="#fff">
+        {isLoggedDetail[0]?.name || "Unnamed"}
+      </ProfileSectionName>
       <ProfileSectionUerName color="#fff">
-        @saviomascarenhas
+        {`@${isLoggedDetail[0]?.username}` || "---"}
       </ProfileSectionUerName>
       <ProfileSectionUerName color="#808080">
-        Joined 20 August 2020
+        {(isLoggedDetail[0]?.joinedDate &&
+          formatDate(isLoggedDetail[0]?.joinedDate)) ||
+          "---"}
       </ProfileSectionUerName>
       <ProfileSectionBioContainer>
         <ProfileSectionBio color="#fff">
-          I am Sarah Johnson, an experienced marketing professional with a knack
-          for crafting compelling brand narratives and implementing effective
-          strategies. I thrive in fast-paced environments, leveraging my
-          analytical skills to drive measurable results and exceed targets.
-          Passionate about innovation, I continuously stay updated with the
-          latest industry trends to deliver impactful campaigns.
+          {isLoggedDetail[0]?.bio ||
+            `"Welcome to MetaBlog! Share your story, insights, and passion with the world. 📝✨ #BloggingJourney"`}
         </ProfileSectionBio>
       </ProfileSectionBioContainer>
       <EditProfileButtonContainer>

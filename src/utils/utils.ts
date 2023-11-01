@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 
 export const decodeToken = (token: string) => {
@@ -8,4 +8,10 @@ export const decodeToken = (token: string) => {
   const currentTime = Date.now();
   const relativeTime = formatDistanceToNow(expirationTime, { addSuffix: true });
   return { expirationTime, currentTime, relativeTime, decodedToken };
+};
+
+export const formatDate = (date: string) => {
+  const parsedDate = new Date(date);
+  const formattedDate = format(parsedDate, "do MMMM yyyy");
+  return `Joined ${formattedDate}`;
 };
