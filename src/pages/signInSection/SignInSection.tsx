@@ -16,7 +16,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Form, Formik } from "formik";
 import { useSignInFormMutation } from "../../logic/reactQuery/mutation/useMutationSignIn";
 import { useDispatch } from "react-redux";
-import { setLoggedDetail, setLoggedIn } from "../../logic/redux/action/action";
+import { setLoggedIn } from "../../logic/redux/action/action";
 import { decodeToken } from "../../utils/utils";
 import ErrorModal from "../../components/errorModal/ErrorModal";
 
@@ -61,14 +61,6 @@ const SignInSection = () => {
         const decoded: any = decodeToken(result?.data?.token);
         localStorage.setItem("expirationTime", decoded?.expirationTime);
         dispatch(setLoggedIn(true));
-        dispatch(
-          setLoggedDetail([
-            {
-              name: result?.data?.user?.name,
-              email: result?.data?.user?.email,
-            },
-          ])
-        );
         navigate(Paths.home);
       }
     } catch (e) {
