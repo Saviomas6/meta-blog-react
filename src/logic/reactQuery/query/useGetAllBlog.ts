@@ -2,18 +2,17 @@ import { useQuery } from "react-query";
 import { apiEndPoints } from "../../../utils/apiUrl";
 import { axiosInstance } from "../../../utils/axiosIntercepter";
 
-const getUserDetail = async () => {
-  const { data } = await axiosInstance.get(`${apiEndPoints?.userDetail}`);
+const getAllBlog = async () => {
+  const { data } = await axiosInstance.get(`${apiEndPoints?.getAllBlog}`);
   return data;
 };
 
-export const useGetUserDetail = () => {
+export const useGetAllBlog = () => {
   const { data, isError, isFetching, isLoading } = useQuery(
-    "userDetail",
-    getUserDetail,
+    "getAllBlog",
+    getAllBlog,
     {
       refetchOnWindowFocus: false,
-      retry: 2,
     }
   );
   return { data, isError, isFetching, isLoading };

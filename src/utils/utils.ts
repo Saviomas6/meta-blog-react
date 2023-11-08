@@ -15,3 +15,11 @@ export const formatDate = (date: string) => {
   const formattedDate = format(parsedDate, "do MMMM yyyy");
   return `Joined ${formattedDate}`;
 };
+
+export const handlePrecision = (val: any, len: number) => {
+  const testVal = String(val);
+  if (testVal.length >= len) {
+    return `${testVal.slice(0, len)}...`;
+  }
+  return testVal;
+};

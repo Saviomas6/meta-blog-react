@@ -2,18 +2,19 @@ import { useQuery } from "react-query";
 import { apiEndPoints } from "../../../utils/apiUrl";
 import { axiosInstance } from "../../../utils/axiosIntercepter";
 
-const getUserDetail = async () => {
-  const { data } = await axiosInstance.get(`${apiEndPoints?.userDetail}`);
+const getBlogById = async (id: string | undefined) => {
+  const { data } = await axiosInstance.get(
+    `${apiEndPoints?.getBlogById}/${id}`
+  );
   return data;
 };
 
-export const useGetUserDetail = () => {
+export const useGetBlogById = (id: string | undefined) => {
   const { data, isError, isFetching, isLoading } = useQuery(
-    "userDetail",
-    getUserDetail,
+    ["getBlogById", id],
+    () => getBlogById(id),
     {
       refetchOnWindowFocus: false,
-      retry: 2,
     }
   );
   return { data, isError, isFetching, isLoading };

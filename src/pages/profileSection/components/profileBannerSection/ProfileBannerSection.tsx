@@ -1,5 +1,7 @@
 import { useAppSelector } from "../../../../logic/redux/store/hooks";
 import * as Styled from "./style";
+import noProfilePicture from "../../../../assets/noProfilePicture.jpeg";
+import noBannerPicture from "../../../../assets/noBannerPicture.png";
 
 const ProfileBannerSection = () => {
   const isLoggedDetail = useAppSelector(
@@ -11,7 +13,7 @@ const ProfileBannerSection = () => {
       <Styled.ProfileBannerLayout
         bgImage={
           (isLoggedDetail[0]?.bannerUrl && isLoggedDetail[0]?.bannerUrl) ||
-          "https://images.pexels.com/photos/17121023/pexels-photo-17121023/free-photo-of-clouds-over-castle-in-forest.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          noBannerPicture
         }></Styled.ProfileBannerLayout>
       <Styled.ProfileImageMainContainer>
         <Styled.ProfileImageMainLayout>
@@ -19,7 +21,7 @@ const ProfileBannerSection = () => {
             profileImage={
               (isLoggedDetail[0]?.profileUrl &&
                 isLoggedDetail[0]?.profileUrl) ||
-              "https://images.pexels.com/photos/17121023/pexels-photo-17121023/free-photo-of-clouds-over-castle-in-forest.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+              noProfilePicture
             }></Styled.ProfileImageLayout>
         </Styled.ProfileImageMainLayout>
       </Styled.ProfileImageMainContainer>

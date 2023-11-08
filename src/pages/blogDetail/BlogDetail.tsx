@@ -1,4 +1,5 @@
-import TippyToolTip from "../../components/tippyTooltip/TippyToolTip";
+// import TippyToolTip from "../../components/tippyTooltip/TippyToolTip";
+import { useParams } from "react-router-dom";
 import { Container, OpacityAnimation, Wrapper } from "../../styles/sharedStyle";
 import {
   BlogDetailDescription,
@@ -11,74 +12,50 @@ import {
   BlogImageContainer,
   Category,
 } from "./style";
+import { useGetBlogById } from "../../logic/reactQuery/query/useGetBlogById";
+import { formatDate } from "../../utils/utils";
+import noProfilePicture from "../../assets/noProfilePicture.jpeg";
 
 const BlogDetail = () => {
+  const { id } = useParams();
+  const { data } = useGetBlogById(id && id);
+
   return (
     <div>
       <Container>
         <Wrapper>
           <OpacityAnimation>
-            <TippyToolTip
+            {/* <TippyToolTip
               placement="bottom"
               toolTipContent={
                 <div>
                   Hello world this is my new tooltip added i want a new change
                   in my tooltip
                 </div>
-              }>
-              <Category>Technology</Category>
-            </TippyToolTip>
+              }> */}
+            <Category>{data && data[0]?.blogCategory}</Category>
+            {/* </TippyToolTip> */}
 
             <BlogDetailHeading>
-              Ideas Unleashed: Where Creativity Finds Its Voice Ideas Unleashed:
-              Where Creativity Finds Its Voice
+              {data && data[0]?.blogHeading}
             </BlogDetailHeading>
             <BlogDetailProfileContainer>
               <BlogDetailProfileImageContainer>
                 <BlogDetailProfileImage
-                  src="https://images.pexels.com/photos/5540782/pexels-photo-5540782.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                  src={(data && data[0]?.user?.profileUrl) || noProfilePicture}
                   alt="img"
                 />
               </BlogDetailProfileImageContainer>
               <BlogDetailProfileUserName>
-                Savio Mascarenhas | 20 August 2020
+                {data && data[0]?.user?.name} |{" "}
+                {data && formatDate(data[0]?.user?.joinedDate)}
               </BlogDetailProfileUserName>
             </BlogDetailProfileContainer>
             <BlogImageContainer>
-              <BlogImage
-                src="https://images.pexels.com/photos/5540782/pexels-photo-5540782.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-                alt="image"
-              />
+              <BlogImage src={data && data[0]?.blogImage} alt="image" />
             </BlogImageContainer>
             <BlogDetailDescription>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry's standard
-              dummy text ever since the 1500s, when an unknown printer took a
-              galley of type and scrambled it to make a type specimen book. It
-              has survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry's standard
-              dummy text ever since the 1500s, when an unknown printer took a
-              galley of type and scrambled it to make a type specimen book. It
-              has survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+              {data && data[0]?.blogDescription}
             </BlogDetailDescription>
           </OpacityAnimation>
         </Wrapper>

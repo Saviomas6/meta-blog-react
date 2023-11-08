@@ -14,7 +14,7 @@ import EditProfileSection from "../pages/editProfileSection/EditProfileSection";
 import { setLoggedDetail, setLoggedIn } from "../logic/redux/action/action";
 import { useEffect } from "react";
 import { useGetUserDetail } from "../logic/reactQuery/query/useGetUserDetail";
-import LoadingText from "../components/loadingText/LoadingText";
+import LoadingSpinner from "../components/loading/LoadingSpinner";
 
 export interface RouteDefinition {
   element: any;
@@ -150,7 +150,7 @@ const RoutePath = () => {
   return (
     <>
       {isLoading || isFetching ? (
-        <LoadingText />
+        <LoadingSpinner />
       ) : (
         <Layout>
           <Routes>{routes.map(mapRoutes)}</Routes>

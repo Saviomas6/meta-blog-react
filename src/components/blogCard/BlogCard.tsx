@@ -2,7 +2,8 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import * as Styled from "./style";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "../../routes/path";
-
+import { handlePrecision } from "../../utils/utils";
+import noProfilePicture from "../../assets/noProfilePicture.jpeg";
 interface I_Props {
   profileImage: string;
   joinedDate: string;
@@ -32,7 +33,10 @@ const BlogCard = ({
     <Styled.BlogCardMainContainer onClick={handleRoute}>
       <Styled.BlogCardProfileWrapper>
         <Styled.BlogCardProfileImageContainer>
-          <Styled.BlogCardProfileImage src={profileImage} alt="profileImage" />
+          <Styled.BlogCardProfileImage
+            src={profileImage || noProfilePicture}
+            alt="profileImage"
+          />
         </Styled.BlogCardProfileImageContainer>
         <Styled.BlogCardProfileUserNameWrapper>
           <Styled.BlogCardProfileUserName>
@@ -46,8 +50,13 @@ const BlogCard = ({
       <Styled.BlogCardImageContainer>
         <Styled.BlogCardImage src={blogImage} alt="image" />
       </Styled.BlogCardImageContainer>
-      <Styled.BlogCardHeading>{heading}</Styled.BlogCardHeading>
-      <Styled.BlogCardDescription>{description}</Styled.BlogCardDescription>
+      <Styled.BlogCardHeading>
+        {" "}
+        {handlePrecision(heading, 25)}
+      </Styled.BlogCardHeading>
+      <Styled.BlogCardDescription>
+        {handlePrecision(description, 200)}
+      </Styled.BlogCardDescription>
       {isEditable && (
         <Styled.BlogCardEditDeleteContainer>
           <Styled.BlogCardIcon

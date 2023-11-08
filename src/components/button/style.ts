@@ -12,6 +12,9 @@ export const ButtonContainer = styled.button<{
   background-color: ${({ bgColor }) => bgColor || "#4b6bfb"};
   color: #fff;
   cursor: pointer;
+  &:disabled {
+    opacity: 0.6;
+  }
 `;
 export const LoadingContainer = styled.span`
   display: inline-block;

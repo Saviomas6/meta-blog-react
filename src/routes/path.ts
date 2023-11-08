@@ -4,7 +4,7 @@ export enum Paths {
   createBlog = "/create",
   signIn = "/signIn",
   register = "/register",
-  blogDetail = "/blogDetail",
+  blogDetail = "/blogDetail/:id",
   profile = "/profile",
   editProfile = "/editProfile",
 }

@@ -10,11 +10,15 @@ import { Fragment, useState } from "react";
 import { AllBlogCategorySection, AllBlogHeading } from "./style";
 import { categoryData } from "./categoryData";
 import { useNavigate } from "react-router-dom";
+import { useGetAllBlog } from "../../logic/reactQuery/query/useGetAllBlog";
+import { formatDate } from "../../utils/utils";
 
 const AllBlogSection = () => {
   const [isCategorySelected, setIsCategorySelected] =
     useState<string>("fashion");
   const navigate = useNavigate();
+  const { data } = useGetAllBlog();
+
   return (
     <Container>
       <Wrapper>
@@ -33,16 +37,16 @@ const AllBlogSection = () => {
             ))}
           </AllBlogCategorySection>
           <CardGridContainer>
-            {Array.from({ length: 20 }, (_x, v) => (
-              <Fragment key={v}>
+            {data?.map((value: any, i: number) => (
+              <Fragment key={i}>
                 <BlogCard
-                  blogImage="https://images.pexels.com/photos/5540782/pexels-photo-5540782.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-                  joinedDate="Joined 20 June 2023"
-                  profileImage="https://images.pexels.com/photos/16954314/pexels-photo-16954314/free-photo-of-young-woman-standing-in-the-meadow.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-                  username="Savio Mascarenhas"
-                  heading="New Blog Heading"
-                  description="We’ve trained a model called ChatGPT which interacts in a conversational way.."
-                  handleRoute={() => navigate("/blogDetail")}
+                  blogImage={value?.blogImage}
+                  joinedDate={formatDate(value?.user?.joinedDate)}
+                  profileImage={value?.user?.profileUrl}
+                  username={value?.user?.name}
+                  heading={value.blogHeading}
+                  description={value.blogDescription}
+                  handleRoute={() => navigate(`/blogDetail/${value?._id}`)}
                 />
               </Fragment>
             ))}

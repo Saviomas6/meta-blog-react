@@ -55,4 +55,5 @@ export const Category = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  text-transform: capitalize;
 `;

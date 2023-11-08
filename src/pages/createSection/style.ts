@@ -108,3 +108,15 @@ export const CreateButtonWrapper = styled.div`
   grid-template-columns: 250px;
   margin-top: 30px;
 `;
+
+export const UploadProgressBarMainContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const UploadProgressBarContainer = styled.div`
+  height: 100px;
+  width: 100px;
+`;
